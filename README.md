@@ -1,1 +1,1 @@
-# wf-namegen
+# Warframe Name Generator
