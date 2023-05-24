@@ -8,13 +8,26 @@ select {
 
 button {
     margin-top: 5px;
-
-    text-align: center;
+    /* text-align: center; */
 }
 
-#result {
+div.output {
+    width: 75%;
+    height: auto;
+    float: left;
     padding: 3px;
-    /* width: 100px; */
-    /* height: 100px; */
+    margin-left: 15px;
+    /* background-image: url(); */
     background-color: white;
+}
+
+div.menu {
+    float: right;
+}
+
+div.footer { 
+    font-size: 8pt;
+    line-height: 10%;
+    /* margin-top: 15px; */
+    color: #777777;
 }

@@ -7,30 +7,32 @@
     </head>
 
     <body>
-        <table>
-            <tr>
-                <td>
-                <!-- TODO: custom faction image?? -->
-                <div id="result">
-                    
-                </div>
-            </td>
-            <td>
-                <select id="faction">
-                    <option value="" disabled selected>Select Faction</option>
-                    <option value="corpus">Corpus</option>
-                    <option value="grineer">Grineer</option>
-                    <option value="meridian">Steel Meridian</option>
-                    <option value="arbiters">Arbiters of Hexis</option>
-                    <option value="suda">Cephalon Suda</option>
-                    <option value="perrin">Perrin Sequence</option>
-                    <option value="veil">Red Veil</option>
-                    <option value="loka">New Loka</option>
-                </select>
-                <br>
-                <button type="button" onclick="generate()" id="generate">Generate</button>
-            </td>
-            </tr>
-        </table>
+        
+        <div class="output">
+            <div id="result">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </div>    
+        </div>
+
+        <div class="menu">
+            <select id="faction">
+                <option value="" disabled selected>Select Faction</option>
+                <option value="corpus">Corpus</option>
+                <option value="grineer">Grineer</option>
+                <option value="meridian">Steel Meridian</option>
+                <option value="arbiters">Arbiters of Hexis</option>
+                <option value="suda">Cephalon Suda</option>
+                <option value="perrin">Perrin Sequence</option>
+                <option value="veil">Red Veil</option>
+                <option value="loka">New Loka</option>
+            </select>
+            <br>
+            <button type="button" onclick="generate()" id="generate">Generate</button>
+        </div>
+        
+        <!-- TODO: help. formatting. -->
+        <div class="footer">
+            Warframe © 2023 Digital Extremes Ltd. 
+        </div>
     </body> 
 </html>
