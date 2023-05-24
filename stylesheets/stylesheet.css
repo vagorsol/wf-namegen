@@ -1,0 +1,20 @@
+html, body {
+    background-color: #F0F0F0;
+}
+
+select {
+    text-align: center;
+}
+
+button {
+    margin-top: 5px;
+
+    text-align: center;
+}
+
+#result {
+    padding: 3px;
+    /* width: 100px; */
+    /* height: 100px; */
+    background-color: white;
+}
