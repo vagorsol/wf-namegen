@@ -2,32 +2,63 @@ html, body {
     background-color: #F0F0F0;
 }
 
+header {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    background-color: #a0a0a0;
+}
+
+body {
+    margin: 0; 
+    padding: 0;
+}
+
+#main {
+    margin: 0 10px;
+}
+
+div.title {
+    text-align: right;
+    margin-right: 10px;
+}
+
+section {
+    display: inline-flex;
+    
+}
+
+section.head {
+    margin-left: 10px;
+}
+
 select {
     text-align: center;
 }
 
 button {
     margin-top: 5px;
-    /* text-align: center; */
 }
 
 div.output {
-    width: 75%;
+    width: 50%;
     height: auto;
-    float: left;
-    padding: 3px;
-    margin-left: 15px;
-    /* background-image: url(); */
+    text-align: center;
+    padding: 10px;
     background-color: white;
 }
 
+
 div.menu {
-    float: right;
+    margin-left: 15px;
 }
 
 div.footer { 
     font-size: 8pt;
     line-height: 10%;
-    /* margin-top: 15px; */
+    margin: 0 10px;
+    margin-top: 15px;
     color: #777777;
 }
