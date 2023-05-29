@@ -32,7 +32,15 @@ section {
 
 section.head {
     margin-left: 10px;
+    padding: 5px;
 }
+
+/* hide faction bar on mobile */
+@media screen and (min-width: 0px) and (max-width: 720px) {
+    section.facion { display: none; }
+    .mobile-hide{ display: none; }
+}
+
 
 select {
     text-align: center;
@@ -43,13 +51,12 @@ button {
 }
 
 div.output {
-    width: 50%;
+    width: 45vw;
     height: auto;
     text-align: center;
     padding: 10px;
     background-color: white;
 }
-
 
 div.menu {
     margin-left: 15px;

@@ -2,71 +2,80 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="vagorsol">
     </head>
 
     <body>
         <header>
             <!-- Icons / Links -->
+            </a>
             <section class="head">
                 <a href="http://www.warframe.com" title="Official Website" target="_blank" rel="nofollow noopener noreferrer">
-                    <img src="images/logo.png" alt="Warframe logo" width="80" style="padding-right: 0px 0px 5px 10px">
+                    <img src="images/logo.png" alt="Warframe logo" width="80" style="padding-right: 10px;">
                 </a>
+                <!-- overflow/hide bottom images on mobile ig? -->
+                <section class="facion">
+                    <a href="https://warframe.fandom.com/wiki/Grineer" title="Grineer" target="_blank" rel="nofollow noopener noreferrer">
+                        <img src="images/grineer.svg" alt="Grineer icon" width="40">
+                    </a>
+                    
+                    <a href="https://warframe.fandom.com/wiki/Corpus" title="Corpus" target="_blank" rel="nofollow noopener noreferrer">
+                        <img src="images/corpus.svg" alt="Corpus icon" width="40">
+                    </a>
 
-                <a href="https://warframe.fandom.com/wiki/Grineer" title="Grineer" target="_blank" rel="nofollow noopener noreferrer">
-                    <img src="images/grineer.svg" alt="Grineer icon" width="40">
-                </a>
-                
-                <a href="https://warframe.fandom.com/wiki/Corpus" title="Corpus" target="_blank" rel="nofollow noopener noreferrer">
-                    <img src="images/corpus.svg" alt="Corpus icon" width="40">
-                </a>
+                    <div style="border-left:1px solid #000; height: 35px; margin: 2px 3px 0px 5px;"></div>
 
-                <div style="border-left:1px solid #000; height:40px; margin: 2px 3px 0px 5px;"></div>
+                    <a href="https://warframe.fandom.com/wiki/Arbiters_of_Hexis" title="Arbiters of Hexis" target="_blank" rel="nofollow noopener noreferrer">
+                        <img src="images/arbiters.webp" alt="Arbiters of Hexis icon" width="40">
+                    </a>
 
-                <a href="https://warframe.fandom.com/wiki/Arbiters_of_Hexis" title="Arbiters of Hexis" target="_blank" rel="nofollow noopener noreferrer">
-                    <img src="images/arbiters.webp" alt="Arbiters of Hexis icon" width="40">
-                </a>
+                    <a href="https://warframe.fandom.com/wiki/Cephalon_Suda" title="Cephalon Suda" target="_blank" rel="nofollow noopener noreferrer">
+                        <img src="images/suda.svg" alt="Cephalon Suda icon" width="40">
+                    </a>
 
-                <a href="https://warframe.fandom.com/wiki/Cephalon_Suda" title="Cephalon Suda" target="_blank" rel="nofollow noopener noreferrer">
-                    <img src="images/suda.svg" alt="Cephalon Suda icon" width="40">
-                </a>
+                    <a href="https://warframe.fandom.com/wiki/Red_Veil" title="Red Veil" target="_blank" rel="nofollow noopener noreferrer">
+                        <img src="images/veil.webp" alt="Red Veil icon" width="40">
+                    </a>
 
-                <a href="https://warframe.fandom.com/wiki/Red_Veil" title="Red Veil" target="_blank" rel="nofollow noopener noreferrer">
-                    <img src="images/veil.webp" alt="Red Veil icon" width="40">
-                </a>
-
-                <a href="https://warframe.fandom.com/wiki/New_Loka" title="New Loka" target="_blank" rel="nofollow noopener noreferrer">
-                    <img src="images/loka.webp" alt="New Loka icon" width="40">
-                </a>
+                    <a href="https://warframe.fandom.com/wiki/New_Loka" title="New Loka" target="_blank" rel="nofollow noopener noreferrer">
+                        <img src="images/loka.webp" alt="New Loka icon" width="40">
+                    </a>
+                </section>
             </section>
 
             <!-- Page Title -->
             <div class="title">
-                <h2>WARFRAME Name Generator</h2>
-                <p style="margin-top: -20px">put credits here or w/e</p>
+                <h2>WARFRAME Character Name Generator</h2>
+                <p style="margin-top: -20px">generator by <a href="https://vagorsol.carrd.co/">vagorsol</a></p>
             </div>
         </header>
         
         <div id="main">
             <p>
-                Disclaimer text (please don't doxx me lmao)
+                <b style="font-size: 15px">DISCLAIMER</b>
+                <br> This is not an official name generator, nor is it affliated with the creators.
             </p>
             <p>
-                <b>Where's Steel Meridian/Perrin Sequence? </b> 
-                (to note that Perrin sequence is folded into Corpus because not much different (and same for SM + Grineer))
+                <b>How to Use</b>
+                <br> Select faction, hit generate, get ten random names. Quality is not guaranteed.
+            </p>
+            <p>
+                <b>Where is Steel Meridian/Perrin Sequence?</b> 
+                <br> Since names for the Perrin Sequence and Steel Meridian follow Corpus and Grineer conventions, respectively, 
+                they are omitted to avoid redundancy.
             </p>
 
             <section id="generator">
-                <!-- TODO: how to have output box and not dependent on text and/or size -->
                 <div class="output">
                     <div id="result">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        <!-- TODO: output results here (or something) -->
                     </div>    
                 </div>
-        
+
                 <div class="menu">
                     <select id="faction">
-                        <option value="" disabled selected>Select Faction</option>
+                        <option value="" disabled selected>Select</option>
                         <option value="corpus">Corpus</option>
                         <option value="grineer">Grineer</option>
                         <option value="hexis">Arbiters of Hexis</option>
