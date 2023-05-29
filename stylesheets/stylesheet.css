@@ -27,7 +27,6 @@ div.title {
 
 section {
     display: inline-flex;
-    
 }
 
 section.head {
@@ -40,7 +39,6 @@ section.head {
     section.facion { display: none; }
     .mobile-hide{ display: none; }
 }
-
 
 select {
     text-align: center;
