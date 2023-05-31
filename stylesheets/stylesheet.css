@@ -53,6 +53,7 @@ div.output {
     height: auto;
     text-align: center;
     padding: 10px;
+    white-space: pre-line;
     background-color: white;
 }
 
