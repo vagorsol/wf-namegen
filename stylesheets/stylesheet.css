@@ -44,7 +44,23 @@ select {
     text-align: center;
 }
 
+/* tab styling */
+.tab {
+    overflow: hidden;
+    margin-bottom: 5px;
+    background-color: #f1f1f1;
+}
+
 button {
+    cursor: pointer;
+    transition: 0.3s;
+}  
+/* Style the tab content */
+.tabcontent {
+    display: none;
+} 
+
+#generate {
     margin-top: 5px;
 }
 

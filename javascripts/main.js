@@ -3,7 +3,25 @@ var sudaPrefix = ["Arch-Mem", "Disp-Arch", "Surv-Tel", "Expi-Dyna", "Log-Rec", "
 
 /*-------------------------------------*/
 
-function generate() {
+function openTab(event, tabName) {
+    var i, tabcontent, tablinks;
+    
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+// generate names
+function generateName() {
     var faction = document.getElementById("faction").value;
     var output = document.getElementById("result");
     var names; // empty array for output
@@ -14,7 +32,7 @@ function generate() {
         return;
     } else {
         // pass function by name. i guess
-        names = genNames(faction);
+        names = factNames(faction);
     }
 
     // convert to string to append
@@ -33,7 +51,7 @@ function generate() {
 }
 
 // given a faction, use the associated name generation rules and return randomly generated names
-function genNames(faction) {
+function factNames(faction) {
     var names = [];
     for (let i = 0; i < 10; i ++) {
         var name = window[faction].apply(); 

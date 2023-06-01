@@ -5,8 +5,6 @@ function generate() {
 
     var names = genNames(faction);
     console.log("names: " + names);
-
-
 }
 
 // given name generation rules (for a given faction) return randomly generated names
