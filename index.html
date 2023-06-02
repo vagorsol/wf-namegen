@@ -7,7 +7,7 @@
     </head>
     <script type="text/javascript" src="javascripts/main.js"></script>
 
-    <body>
+    <body onload="document.getElementById('defaultOpen').click();">
         <header>
             <!-- Icons / Links -->
             <section class="head">
@@ -73,17 +73,15 @@
                 <br> Since names for the Perrin Sequence and Steel Meridian follow Corpus and Grineer conventions, respectively, 
                 they are omitted to avoid redundancy.
             </p>
+            <p>
+               (bullet points) Made Railjack Crewmate flavor text gender-neutral.
+            </p>
 
             <!-- Tab links -->
             <div class="tab">
-                <button class="tablinks" onclick="openTab(event, 'names')" id="defaultOpen">Character Names</button>
-                <button class="tablinks" onclick="openTab(event, 'rj')">Railjack Crewmate Backstory</button>
+                <button class="tablinks active" onclick="openTab(event, 'names')" id="defaultOpen">Character Names</button>
+                <button class="tablinks" onclick="openTab(event, 'rj')">Railjack Crewmate Flavor Text</button>
             </div>
-
-            <!-- TODO: this isn't working -->
-            <script>
-                document.getElementById("defaultOpen").click();
-            </script>
 
             <!-- name generator -->
             <div id="names" class="tabcontent">
@@ -109,13 +107,13 @@
             
             <!-- backstory generator -->
             <div id="rj" class="tabcontent">
-                <h3>Railjack Crewmate Backstory</h3>
+                <h3>Railjack Crewmate Flavor Text</h3>
                 <section id="generator">
                     
                     <div class="output" id="rjResult"></div>
     
                     <div class="menu">
-                        <select id="faction">
+                        <select id="factionRJ">
                             <option value="" disabled selected>Select</option>
                             <option value="meridian">Steel Meridian</option>
                             <option value="hexis">Arbiters of Hexis</option>
