@@ -6,6 +6,7 @@
         <meta name="author" content="vagorsol">
     </head>
     <script type="text/javascript" src="javascripts/main.js"></script>
+    <script type="text/javascript" src="data/flavortext.json"></script>
 
     <body onload="document.getElementById('defaultOpen').click();">
         <header>
@@ -113,7 +114,7 @@
                     <div class="output" id="rjResult"></div>
     
                     <div class="menu">
-                        <select id="factionRJ">
+                        <select id="syndicate">
                             <option value="" disabled selected>Select</option>
                             <option value="meridian">Steel Meridian</option>
                             <option value="hexis">Arbiters of Hexis</option>
@@ -123,7 +124,7 @@
                             <option value="loka">New Loka</option>
                         </select>
                         <br>
-                        <button type="button" onclick="generateRJ()" id="generate">Generate</button>
+                        <button type="button" onclick="generateFlavorText()" id="generate">Generate</button>
                     </div>
                 </section>
             </div>
