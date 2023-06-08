@@ -2,6 +2,11 @@ html, body {
     background-color: #F0F0F0;
 }
 
+/* font styling */
+body, button, select { 
+    font-family: Verdana, sans-serif;
+}
+
 header {
     width: 100%;
     display: inline-flex;
@@ -26,6 +31,7 @@ div.title {
 }
 
 section {
+    font-family: Verdana, sans-serif;
     display: inline-flex;
 }
 
@@ -38,6 +44,7 @@ section.head {
 @media screen and (min-width: 0px) and (max-width: 720px) {
     section.facion { display: none; }
     .mobile-hide{ display: none; }
+    select { font-size: 12px; }
 }
 
 select {
@@ -53,12 +60,15 @@ select {
 
 button {
     cursor: pointer;
-    transition: 0.3s;
 }  
 /* Style the tab content */
 .tabcontent {
     display: none;
 } 
+
+.tablinks {
+    margin-top: 5px;
+}
 
 #generate {
     margin-top: 5px;
