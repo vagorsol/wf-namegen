@@ -370,8 +370,17 @@ var flavortext = {
 var hexisPrefix = ["Strategist", "Probate", "Scholar", "Vigilant", "Centurion", "Venator", "Adept", "Arbiter", "Armsman", "Seneschal"];
 var sudaPrefix = ["Arch-Mem", "Disp-Arch", "Surv-Tel", "Expi-Dyna", "Log-Rec", "Seek-Loc", "Res-Arc", "Cura-Phano", "Pion-Rec", "Inves-Resp", "Ult-Pho"];
 
-/*-------------------------------------*/
+var corpusRoles = ["Developer", "Extrapolator", "Intern", "Paranoia Influencer", "Cartographer", "Planner", "Intern", "Reaction Proactivator", "Officer", "Adviser", 
+    "Failure Instructor", "Sniffer", "Dissemination", "Underling", "Accountant", "Analyst", "Brutality Specialist", "Chaos Director", "Communications Drone", "Conflict Auditor", 
+    "Converter", "Diplomat", "Encryption Specialist", "Engineer", "Eradication", "Excavator", "Expunger", "Facilitator", "Floater", "Functionary", "Hazmat Worker", 
+    "Ignorance Consultant", "Innovator", "Inspiration Mechanic", "Junior Assistant Manager", "Licensing", "Luck Administrator", "Manager", "Marketing Clerk", "Obedience Leader", 
+    "Operations Generalist", "Overseer", "Philosopher", "Polymath", "Rectifier", "Sales Associate", "Signal Drone", "Social Control", "Tracer", "Undersecretary", "Vision Overseer"
+];
 
+/*-------------------------------------*/
+// functions
+
+// tabbing controls
 function openTab(event, tabName) {
     var i, tabcontent, tablinks;
     
@@ -436,7 +445,7 @@ function generateFlavorText() {
     var retText; // flavor text to return
 
     // alert if try to generate without selecting a syndicate
-    if (!faction) {
+    if (!syndicate) {
         alert("Please select a faction!");
         return;
     } 
@@ -458,15 +467,16 @@ function grineer() {
 }
 
 function corpus() {
-
+    // get random role
+    var role = corpusRoles[Math.floor(Math.random() * corpusRoles.length)];
 }
 
 function hexis() {
-
+    var prefix = hexisPrefix[Math.floor(Math.random() * hexisPrefix.length)];
 }
 
 function suda() {
-
+    var prefix = sudaPrefix[Math.floor(Math.random() * sudaPrefix.length)];
 }
 
 function veil() {
