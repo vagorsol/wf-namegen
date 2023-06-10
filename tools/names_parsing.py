@@ -65,6 +65,7 @@ loka_names = formatting(lokaLst, loka_names)
 # write names to corresponding output files
 fileout("grineer", grineer_names)
 fileout("corpus", corpus_names)
+fileout("suda", suda_names)
 fileout("hexis", hexis_names)
 fileout("veil", veil_names)
 fileout("loka", loka_names)
