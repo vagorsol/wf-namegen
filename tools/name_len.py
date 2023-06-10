@@ -4,22 +4,29 @@ def avg_name_len(lines):
 
     for line in lines: 
         fmtline = line.replace("\n", "")
+        nameslst = []
 
-        # acname_count for names with dashes in corpus/grineer 
+        # account for names with dashes in corpus/grineer 
         if "-" in fmtline:
             if "-" not in name_count: 
                 name_count["-"] = 0
             name_count["-"] += 1
             fmtline = fmtline.split("-")[0]
 
-        name_len = len(fmtline)
+        # names with spaces
+        if " " in fmtline: 
+            spltline = fmtline.split(" ")
+            nameslst.append(len(spltline[0]))
+            nameslst.append(len(spltline[1]))
+        else: 
+            nameslst.append(len(fmtline))      
 
-        if name_len not in name_count:
-            name_count[name_len] = 0
-        name_count[name_len] += 1
+        for name_len in nameslst:
+            if name_len not in name_count:
+                name_count[name_len] = 0
+            name_count[name_len] += 1
     
     # sort + output results
-    print("Length: Amount")
     if "-" in name_count:
         print("-: " + str(name_count["-"]))
         del name_count["-"]
@@ -37,6 +44,7 @@ def avg_name_len(lines):
 
 factions = ["corpus", "grineer", "veil", "loka", "suda", "hexis"]
 
+print("Length: Amount\n")
 for faction in factions: 
     filename = "data/names/" + faction + ".txt"
     file = open(filename, "r+")
