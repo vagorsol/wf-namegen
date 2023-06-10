@@ -367,14 +367,15 @@ var flavortext = {
     ]
 };
 
-var hexisPrefix = ["Strategist", "Probate", "Scholar", "Vigilant", "Centurion", "Venator", "Adept", "Arbiter", "Armsman", "Seneschal"];
+var hexisPrefix = ["Strategist", "Probate", "Scholar", "Vigilant", "Centurion", "Venator", "Adept", "Arbiter", "Armsman", "Seneschal", "Arbiter Rex", "Arbiter Princeps"];
 var sudaPrefix = ["Arch-Mem", "Disp-Arch", "Surv-Tel", "Expi-Dyna", "Log-Rec", "Seek-Loc", "Res-Arc", "Cura-Phano", "Pion-Rec", "Inves-Resp", "Ult-Pho"];
 
 var corpusRoles = ["Developer", "Extrapolator", "Intern", "Paranoia Influencer", "Cartographer", "Planner", "Intern", "Reaction Proactivator", "Officer", "Adviser", 
     "Failure Instructor", "Sniffer", "Dissemination", "Underling", "Accountant", "Analyst", "Brutality Specialist", "Chaos Director", "Communications Drone", "Conflict Auditor", 
     "Converter", "Diplomat", "Encryption Specialist", "Engineer", "Eradication", "Excavator", "Expunger", "Facilitator", "Floater", "Functionary", "Hazmat Worker", 
     "Ignorance Consultant", "Innovator", "Inspiration Mechanic", "Junior Assistant Manager", "Licensing", "Luck Administrator", "Manager", "Marketing Clerk", "Obedience Leader", 
-    "Operations Generalist", "Overseer", "Philosopher", "Polymath", "Rectifier", "Sales Associate", "Signal Drone", "Social Control", "Tracer", "Undersecretary", "Vision Overseer"
+    "Operations Generalist", "Overseer", "Philosopher", "Polymath", "Rectifier", "Sales Associate", "Signal Drone", "Social Control", "Tracer", "Undersecretary", "Vision Overseer",
+    "Branch Manager", "Digitizer"
 ];
 
 /*-------------------------------------*/
