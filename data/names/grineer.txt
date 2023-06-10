@@ -1,1 +1,35 @@
-['Groka-623', 'Groka-231', 'Groka-16', 'Groka-743', 'Groka-974', 'Groka-41', 'Lokka-350', 'Auzond Gatr', 'Coplig Tiss', 'Aburvi Khenik', 'Auhon Begedd', 'Tilil Edistu', 'Condn Edur', 'Cigbi Fimm', 'Mikta Hokho', 'Oligg Makk', 'Yope Helo', 'Liril Hastad', 'Tirivu Dogr', 'Mihirr Ulibb', 'Ulikt Roo', 'Pett Fakagg', 'Suvremm Bahkk', "Kiligg Tuk'", 'Zy Fidd', 'Citt Loto', 'Tibigo Crnevo', 'Kirpess Obb', 'Ulitzk Firr', 'Lipp Udd', 'Tonis Fiss', 'Zopogiss Ulimm', 'Codiz Diss', 'Crdixaho Kaa', 'Suvrdilb Crga']
+Groka-623
+Groka-231
+Groka-16
+Groka-743
+Groka-974
+Groka-41
+Lokka-350
+Auzond Gatr
+Coplig Tiss
+Aburvi Khenik
+Auhon Begedd
+Tilil Edistu
+Condn Edur
+Cigbi Fimm
+Mikta Hokho
+Oligg Makk
+Yope Helo
+Liril Hastad
+Tirivu Dogr
+Mihirr Ulibb
+Ulikt Roo
+Pett Fakagg
+Suvremm Bahkk
+Kiligg Tuk'
+Zy Fidd
+Citt Loto
+Tibigo Crnevo
+Kirpess Obb
+Ulitzk Firr
+Lipp Udd
+Tonis Fiss
+Zopogiss Ulimm
+Codiz Diss
+Crdixaho Kaa
+Suvrdilb Crga

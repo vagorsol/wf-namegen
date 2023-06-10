@@ -102,7 +102,7 @@ Seek-Loc Voren, Suda
 Lindirit, Loka
 Vigilant Hagao, Hexis
 Cigbi Fimm, Grineer
-Croy, Veil 
+Croy, Veil
 Disp-Arch Tallera, Suda
 Vigilant Ceter, Hexis
 Aesc Ces, Corpus
@@ -131,7 +131,7 @@ Komi, Veil
 Valer Hob, Corpus
 Arbiter Rex Honda, Hexis
 Scipio Fidien, Corpus
-Clather, Loka 
+Clather, Loka
 Tirivu Dogr, Grineer
 Mican, Veil
 Biag Losh, Hexis
