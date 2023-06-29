@@ -1,5 +1,5 @@
 // flavor text lines (deeply unfortunately, i have to put the whole beast of a JSON thing here. sorry!)
-var flavortext = {
+const flavortext = {
     "meridian": [
         [
             "One of many Grineer troops bred on Sedna within earshot of the Rathuum.",
@@ -367,16 +367,27 @@ var flavortext = {
     ]
 };
 
-var hexisPrefix = ["Strategist", "Probate", "Scholar", "Vigilant", "Centurion", "Venator", "Adept", "Arbiter", "Armsman", "Seneschal", "Arbiter Rex", "Arbiter Princeps"];
-var sudaPrefix = ["Arch-Mem", "Disp-Arch", "Surv-Tel", "Expi-Dyna", "Log-Rec", "Seek-Loc", "Res-Arc", "Cura-Phano", "Pion-Rec", "Inves-Resp", "Ult-Pho"];
+const hexisPrefix = ["Strategist", "Probate", "Scholar", "Vigilant", "Centurion", "Venator", "Adept", "Arbiter", "Armsman", "Seneschal", "Arbiter Rex", "Arbiter Princeps"];
+const sudaPrefix = ["Arch-Mem", "Disp-Arch", "Surv-Tel", "Expi-Dyna", "Log-Rec", "Seek-Loc", "Res-Arc", "Cura-Phano", "Pion-Rec", "Inves-Resp", "Ult-Pho"];
 
-var corpusRoles = ["Developer", "Extrapolator", "Intern", "Paranoia Influencer", "Cartographer", "Planner", "Intern", "Reaction Proactivator", "Officer", "Adviser", 
+const corpusRoles = ["Developer", "Extrapolator", "Intern", "Paranoia Influencer", "Cartographer", "Planner", "Intern", "Reaction Proactivator", "Officer", "Adviser", 
     "Failure Instructor", "Sniffer", "Dissemination", "Underling", "Accountant", "Analyst", "Brutality Specialist", "Chaos Director", "Communications Drone", "Conflict Auditor", 
     "Converter", "Diplomat", "Encryption Specialist", "Engineer", "Eradication", "Excavator", "Expunger", "Facilitator", "Floater", "Functionary", "Hazmat Worker", 
     "Ignorance Consultant", "Innovator", "Inspiration Mechanic", "Junior Assistant Manager", "Licensing", "Luck Administrator", "Manager", "Marketing Clerk", "Obedience Leader", 
     "Operations Generalist", "Overseer", "Philosopher", "Polymath", "Rectifier", "Sales Associate", "Signal Drone", "Social Control", "Tracer", "Undersecretary", "Vision Overseer",
     "Branch Manager", "Digitizer"
 ];
+
+// weighted probabilities for name lengths
+const corpusNL = {3:11, 4:102, 5:11, 6:12, 7:3, 8:2, 11:1};
+const grineerNL = {2:1, 3:4, 4:18, 5:21, 6:16, 7:2, 8:3};
+const veilNL = {3:1, 4:7, 5:7, 6:2, 7:2, 8:1, 9:3};
+const lokaNL = {6:6, 7:7, 8:8, 9:1, 10:3, 11:1};
+const sudaNL = {3:2, 4:4, 5:5, 6:1, 7:5, 9:1};
+const hexisNL = {3:3, 4:1, 5:9, 6:2, 7:1, 8:2, 9:3, 10:1, 12:1, 13:1, 18:2};
+
+const corpusDash = {"-": 14, " ": 64}
+const grineerDash = {"-":7, " ":29};
 
 /*-------------------------------------*/
 // functions
@@ -460,6 +471,32 @@ function generateFlavorText() {
     output.textContent = retText;
 }
 
+// given dictionary of lengths w/ associated weights, randomly select one accounting for weights
+function weightedRandom(options) {
+    var i = 0;
+    var items = [];
+    var weights = []; 
+
+    for(var key in options) {
+        items[i] = key;
+        weights[i] = options[key];
+        i++; 
+    }
+    // console.log(weights)
+    for (i = 1; i< weights.length; i++) {
+        weights[i] = weights[i] + weights[i - 1];
+        // console.log(weights[i])
+    }
+    // console.log(weights)
+    var randlen = Math.floor(Math.random() * weights[weights.length - 1]); 
+    // console.log("randome length: " + randlen)
+
+    for (i = 0; i < weights.length; i++) {
+        if (weights[i] >= randlen)
+            return items[i];
+    }
+}
+
 /*-------------------------------------*/
 // name generation rules
 
@@ -485,10 +522,22 @@ function veil() {
 }
 
 function loka() {
+    var namelen = weightedRandom(lokaNL);
+    console.log(namelen);
+    var name = "";
 
+    for (var i = 0; i < namelen; i++) {
+        name += String.fromCharCode(97 + Math.floor(Math.random() * 26));
+    }
+
+    console.log(name);
 }
 
 /*-------------------------------------*/
-// testing here because i am smart and realized i can just test here instead
+// testing
 
-console.log(flavortext["suda"][0][0]); // oh no
+// var w = weightedRandom(veilNL)
+// console.log(w)
+for (let i = 0; i < 10; i++){ 
+    loka()
+}
