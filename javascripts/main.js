@@ -389,6 +389,9 @@ const hexisNL = {3:3, 4:1, 5:9, 6:2, 7:1, 8:2, 9:3, 10:1, 12:1, 13:1, 18:2};
 const corpusDash = {"-": 14, " ": 64}
 const grineerDash = {"-":7, " ":29};
 
+// letters for the actual name generation
+const vowels = "aeiou";
+const consonants = "bcdfghjklmnpqrstvwxyz";
 /*-------------------------------------*/
 // functions
 
@@ -500,13 +503,48 @@ function weightedRandom(options) {
 /*-------------------------------------*/
 // name generation rules
 
+// given length of name, return a random name
+function namegen(namelen) {
+    // vowels no more than 2 in a row and constonants 3 in a row
+    // some change for it to just repeat the same letter (chance)
+    var retname = "";
+    for (let i = 0; i < namelen; i++) {
+
+    }
+
+    return retname;
+}
+
 function grineer() {
-    return "testing";
+
+
+    var dash = weightedRandom(grineerDash);
+
+    if (dash === "-") {
+        var num = Math.floor(Math.random() * 1000); 
+        // append to name here
+    }
 }
 
 function corpus() {
+    var retname = ""; 
+
+    var dash = weightedRandom(corpusDash); 
+
+    if (dash === "-") {
+        const corpusDashNL = {4: 12, 5:2};
+        var namelen = weightedRandom(corpusDashNL);
+
+        retname += ("-" + String.fromCharCode(65 + Math.floor(Math.random() * 26)));
+    } else {
+        // other name here
+    }
+
     // get random role
-    var role = corpusRoles[Math.floor(Math.random() * corpusRoles.length)];
+    retname += (", " + corpusRoles[Math.floor(Math.random() * corpusRoles.length)]);
+    console.log(retname)
+    return retname;
+    
 }
 
 function hexis() {
@@ -527,7 +565,7 @@ function loka() {
     var name = "";
 
     for (var i = 0; i < namelen; i++) {
-        name += String.fromCharCode(97 + Math.floor(Math.random() * 26));
+        name += String.fromCharCode(65 + Math.floor(Math.random() * 26)); // 97 + 
     }
 
     console.log(name);
@@ -538,6 +576,7 @@ function loka() {
 
 // var w = weightedRandom(veilNL)
 // console.log(w)
-for (let i = 0; i < 10; i++){ 
-    loka()
-}
+// for (let i = 0; i < 10; i++){ 
+//     loka()
+// }
+corpus()
