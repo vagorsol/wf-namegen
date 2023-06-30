@@ -386,12 +386,13 @@ const lokaNL = {6:6, 7:7, 8:8, 9:1, 10:3, 11:1};
 const sudaNL = {3:2, 4:4, 5:5, 6:1, 7:5, 9:1};
 const hexisNL = {3:3, 4:1, 5:9, 6:2, 7:1, 8:2, 9:3, 10:1, 12:1, 13:1, 18:2};
 
-const corpusDash = {"-": 14, " ": 64}
+const corpusDash = {"-": 7, " ": 32};
 const grineerDash = {"-":7, " ":29};
 
 // letters for the actual name generation
 const vowels = "aeiou";
 const consonants = "bcdfghjklmnpqrstvwxyz";
+const repeat_letter = {"true": 62, "false": 1014};
 /*-------------------------------------*/
 // functions
 
@@ -505,11 +506,35 @@ function weightedRandom(options) {
 
 // given length of name, return a random name
 function namegen(namelen) {
-    // vowels no more than 2 in a row and constonants 3 in a row
+    // TODO: vowels no more than 2 in a row and constonants 3 in a row
     // some change for it to just repeat the same letter (chance)
-    var retname = "";
-    for (let i = 0; i < namelen; i++) {
+    var retname = String.fromCharCode(65 + Math.floor(Math.random() * 26)); // random starting letter
+    var prevLetter = retname.toLowerCase();
+    var prevRepeat = false; 
 
+    for (let i = 1; i < namelen; i++) {
+        // var repeat = weightedRandom(repeat_letter);
+        // console.log(repeat)
+        // can't repeat twice in a row, next letter has to be a different letter
+        if ( weightedRandom(repeat_letter) === "true" && !prevRepeat){
+            // console.log(i + " repeat");
+
+            retname += prevLetter;
+            i++; 
+            prevRepeat = true;
+        }
+        else {
+            var letterToAdd = String.fromCharCode(97 + Math.floor(Math.random() * 26));
+            // console.log(letterToAdd + " " + prevLetter);
+
+            while (letterToAdd == prevLetter) {
+                letterToAdd = String.fromCharCode(97 + Math.floor(Math.random() * 26));
+            }
+
+            prevLetter = letterToAdd;
+            retname += prevLetter; // maybe weighted random for consonant vs vowel?
+            prevRepeat = false;
+        }
     }
 
     return retname;
@@ -576,7 +601,9 @@ function loka() {
 
 // var w = weightedRandom(veilNL)
 // console.log(w)
-// for (let i = 0; i < 10; i++){ 
-//     loka()
-// }
-corpus()
+for (let i = 0; i < 10; i++){ 
+    // loka()
+    console.log(namegen(10))
+}
+// var testname = namegen(10)
+// console.log(namegen(10))
