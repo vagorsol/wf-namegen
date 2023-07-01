@@ -5,19 +5,29 @@ names_file = open("data/names.txt", "r")
 lines = names_file.readlines()
 
 count = 0
-total_lines = 0
+repeat_occur = 0
+total_letters = 0
+vowel_count = 0
 
-# find duplicates
 for line in lines: 
     fmtline = line.replace("\n", "").split(", ")
     name = fmtline[0]
     
+    # duplicat letters
     repeat = re.findall(r'(.)\1', name)
-    # if len(repeat) > 0:
-    #     print(len(repeat))
+    if len(repeat) > 0:
+        print(name)
+        repeat_occur = repeat_occur + 1
     count = count + len(repeat)
-    total_lines = total_lines + len(name)
+    total_letters = total_letters + len(name)
+    vowel_count = vowel_count + len(re.findall(r'[aeiou]', name))
+    # vowels = re.findall(r'[aeiou]', name)
+    # print(vowels)
+    # print(line)
     
 
 print("Number of consecutive repeated letters occurances: " + str(count)) # 62 / 208 (loosely <- doesn't need to be super accurate)
-print("Total letters: " + str(total_lines)) # no letters minus repeats: 2028
+print("Number of Vowels: " + str(vowel_count))
+print("Number of Constonants: " + str(total_letters - vowel_count)) # 662:1490 vowel to const ratio (a bit off bc Titles BUT this is not a high-accuracy thing lbr)
+print("Total letters: " + str(total_letters)) # no letters minus repeats: 2028
+print(str(repeat_occur) + " " + str(len(lines)))
