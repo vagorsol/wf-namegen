@@ -392,7 +392,8 @@ const grineerDash = {"-":7, " ":29};
 // letters for the actual name generation
 const vowels = "aeiou";
 const consonants = "bcdfghjklmnpqrstvwxyz";
-const repeat_letter = {"true": 62, "false": 1014};
+const repeat_letter = {"true": 5, "false": 95};
+const alphabet_dist = {"vowel": 3, "consonant": 7}
 /*-------------------------------------*/
 // functions
 
@@ -506,43 +507,81 @@ function weightedRandom(options) {
 
 // given length of name, return a random name
 function namegen(namelen) {
-    // TODO: vowels no more than 2 in a row and constonants 3 in a row
-    // some change for it to just repeat the same letter (chance)
-    var retname = String.fromCharCode(65 + Math.floor(Math.random() * 26)); // random starting letter
+    // random starting letter
+    var retname = String.fromCharCode(65 + Math.floor(Math.random() * 26));
     var prevLetter = retname.toLowerCase();
     var prevRepeat = false; 
 
-    for (let i = 1; i < namelen; i++) {
-        // var repeat = weightedRandom(repeat_letter);
-        // console.log(repeat)
-        // can't repeat twice in a row, next letter has to be a different letter
-        if ( weightedRandom(repeat_letter) === "true" && !prevRepeat){
-            // console.log(i + " repeat");
+    // keeps track of vowels/consonants in a row
+    var constCount = 0; // this bitch not working. why.
+    var vowelCount = 0;
+    var letterToAdd;
 
-            retname += prevLetter;
-            i++; 
+    for (let i = 1; i < namelen; i++) {
+        // console.log(constCount)
+        // can't repeat twice in a row, next letter has to be a different letter - rethink how this works? make sure repeated letter
+        // is different from previous letter + if prev = const, vowel & vice versa
+        if (weightedRandom(repeat_letter) === "true" && !prevRepeat && (i < namelen - 1) && i > 1){
+            if (vowels.includes(prevLetter)) {
+                letterToAdd = consonants[Math.floor(Math.random() * consonants.length)];
+                constCount = 2;
+                vowelCount = 0;
+            } else {
+                letterToAdd = vowels[Math.floor(Math.random() * vowels.length)];
+                vowelCount = 2;
+                constCount = 0;
+            }
+            // console.log(i + " repeat");
+            // no const after const and vice versa i think?
+            retname += letterToAdd + letterToAdd;
+            prevLetter = letterToAdd
             prevRepeat = true;
+            i++;
         }
         else {
-            var letterToAdd = String.fromCharCode(97 + Math.floor(Math.random() * 26));
             // console.log(letterToAdd + " " + prevLetter);
+            if(vowelCount == 2) {
+                letterToAdd = consonants[Math.floor(Math.random() * consonants.length)];
+                vowelCount = 0;
+                constCount = 0;
+            } else if (constCount == 2) {
+                letterToAdd = vowels[Math.floor(Math.random() * vowels.length)];
+                constCount = 0;
+                vowelCount = 0;
+            } else {
+                letter_type = weightedRandom(alphabet_dist);
+                do {
+                    if (letter_type === "vowel") {
+                        letterToAdd = vowels[Math.floor(Math.random() * vowels.length)];
+                    } else {
+                        letterToAdd = consonants[Math.floor(Math.random() * consonants.length)];
+                    }
+                } while (letterToAdd === prevLetter)
+                
+                // letterToAdd = String.fromCharCode(97 + Math.floor(Math.random() * 26));
 
-            while (letterToAdd == prevLetter) {
-                letterToAdd = String.fromCharCode(97 + Math.floor(Math.random() * 26));
+                // while (letterToAdd === prevLetter) {                  
+                //     letterToAdd = String.fromCharCode(97 + Math.floor(Math.random() * 26));
+                // }
             }
 
             prevLetter = letterToAdd;
+            
+            if (vowels.includes(prevLetter)) {
+                vowelCount++;
+            } else {
+                constCount++;
+            }
+
             retname += prevLetter; // maybe weighted random for consonant vs vowel?
             prevRepeat = false;
         }
     }
-
+    // console.log(retname.length)
     return retname;
 }
 
 function grineer() {
-
-
     var dash = weightedRandom(grineerDash);
 
     if (dash === "-") {
@@ -602,8 +641,9 @@ function loka() {
 // var w = weightedRandom(veilNL)
 // console.log(w)
 for (let i = 0; i < 10; i++){ 
-    // loka()
+    //  loka()
     console.log(namegen(10))
 }
+console.log(namegen(10))
 // var testname = namegen(10)
 // console.log(namegen(10))
