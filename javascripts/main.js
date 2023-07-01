@@ -386,14 +386,18 @@ const lokaNL = {6:6, 7:7, 8:8, 9:1, 10:3, 11:1};
 const sudaNL = {3:2, 4:4, 5:5, 6:1, 7:5, 9:1};
 const hexisNL = {3:3, 4:1, 5:9, 6:2, 7:1, 8:2, 9:3, 10:1, 12:1, 13:1, 18:2};
 
-const corpusDash = {"-": 7, " ": 32};
-const grineerDash = {"-":7, " ":29};
+const corpusDash = {"-": 2, " ": 8};
+const grineerDash = {"-":3, " ":7};
 
 // letters for the actual name generation
 const vowels = "aeiou";
 const consonants = "bcdfghjklmnpqrstvwxyz";
 const repeat_letter = {"true": 5, "false": 95};
-const alphabet_dist = {"vowel": 3, "consonant": 7}
+const alphabet_dist = {"vowel": 4, "consonant": 6} // idk if should increase this tbh
+
+// TODO: simplify this so the computer isn't shitting itself every time
+const vowel_dist = {"a": 216, "e": 163, "i": 178, "o": 128, "u": 56,}
+const const_dist = { "b": 46, "c": 70, "d": 70,  "f": 22, "g": 54, "h": 75,  "j": 8, "k": 63, "l": 108, "m": 59, "n": 103, "p": 42, "r": 168, "s": 103, "t": 116, "v": 40, "w": 8, "x": 19, "y": 21, "z": 10};
 /*-------------------------------------*/
 // functions
 
@@ -418,41 +422,22 @@ function openTab(event, tabName) {
 // generate names
 function generateName() {
     var faction = document.getElementById("faction").value;
-    var output = document.getElementById("result");
-    var names; // empty array for output
+    var output = document.getElementById("nameResult");
+    var names = ""; 
 
     // alert if try to generate without selecting a faction, otherwise pass name of function to name generator function
     if (!faction) {
         alert("Please select a faction!");
         return;
     } else {
-        // pass function by name. i guess
-        names = factNames(faction);
-    }
-
-    // convert to string to append
-    var nameslst = "";
-    for (let i = 0; i < names.length; i ++) {
-        // avoid prepending newline for first one for nice formating
-        if (i == 0) {
-            nameslst += names[i];
-        } else {
-            nameslst += ("\r\n" + names[i]);
+        names = window[faction].apply();
+        for (let i = 1; i < 10; i ++) {
+            names += "\r\n" + window[faction].apply(); 
         }
     }
 
     // output names
-    output.textContent = nameslst; 
-}
-
-// given a faction, use the associated name generation rules and return randomly generated names
-function factNames(faction) {
-    var names = [];
-    for (let i = 0; i < 10; i ++) {
-        var name = window[faction].apply(); 
-        names.push(name);
-    }
-    return names;
+    output.textContent = names;
 }
 
 // generates random flavor text for given syndicate memeber
@@ -487,14 +472,12 @@ function weightedRandom(options) {
         weights[i] = options[key];
         i++; 
     }
-    // console.log(weights)
+
     for (i = 1; i< weights.length; i++) {
         weights[i] = weights[i] + weights[i - 1];
-        // console.log(weights[i])
     }
-    // console.log(weights)
+
     var randlen = Math.floor(Math.random() * weights[weights.length - 1]); 
-    // console.log("randome length: " + randlen)
 
     for (i = 0; i < weights.length; i++) {
         if (weights[i] >= randlen)
@@ -513,60 +496,51 @@ function namegen(namelen) {
     var prevRepeat = false; 
 
     // keeps track of vowels/consonants in a row
-    var constCount = 0; // this bitch not working. why.
+    var constCount = 0;
     var vowelCount = 0;
     var letterToAdd;
 
     for (let i = 1; i < namelen; i++) {
-        // console.log(constCount)
-        // can't repeat twice in a row, next letter has to be a different letter - rethink how this works? make sure repeated letter
-        // is different from previous letter + if prev = const, vowel & vice versa
+        // ensures that repeated letter can't occur twice in a row, the repeated letter has to be a different letter 
+        // than the preceeding one,  and if prevLetter == const, letterToAdd == vowel & vice versa
         if (weightedRandom(repeat_letter) === "true" && !prevRepeat && (i < namelen - 1) && i > 1){
             if (vowels.includes(prevLetter)) {
-                letterToAdd = consonants[Math.floor(Math.random() * consonants.length)];
+                letterToAdd = weightedRandom(const_dist);
                 constCount = 2;
                 vowelCount = 0;
             } else {
-                letterToAdd = vowels[Math.floor(Math.random() * vowels.length)];
+                letterToAdd = weightedRandom(vowel_dist);
                 vowelCount = 2;
                 constCount = 0;
             }
-            // console.log(i + " repeat");
-            // no const after const and vice versa i think?
+
             retname += letterToAdd + letterToAdd;
             prevLetter = letterToAdd
             prevRepeat = true;
             i++;
         }
         else {
-            // console.log(letterToAdd + " " + prevLetter);
             if(vowelCount == 2) {
-                letterToAdd = consonants[Math.floor(Math.random() * consonants.length)];
+                letterToAdd = weightedRandom(const_dist);
                 vowelCount = 0;
                 constCount = 0;
-            } else if (constCount == 2) {
-                letterToAdd = vowels[Math.floor(Math.random() * vowels.length)];
+            } else if (constCount == 1) {
+                letterToAdd = weightedRandom(vowel_dist);
                 constCount = 0;
                 vowelCount = 0;
             } else {
                 letter_type = weightedRandom(alphabet_dist);
                 do {
                     if (letter_type === "vowel") {
-                        letterToAdd = vowels[Math.floor(Math.random() * vowels.length)];
+                        letterToAdd = weightedRandom(vowel_dist);
                     } else {
-                        letterToAdd = consonants[Math.floor(Math.random() * consonants.length)];
+                        letterToAdd = weightedRandom(const_dist);
                     }
                 } while (letterToAdd === prevLetter)
-                
-                // letterToAdd = String.fromCharCode(97 + Math.floor(Math.random() * 26));
-
-                // while (letterToAdd === prevLetter) {                  
-                //     letterToAdd = String.fromCharCode(97 + Math.floor(Math.random() * 26));
-                // }
             }
 
             prevLetter = letterToAdd;
-            
+
             if (vowels.includes(prevLetter)) {
                 vowelCount++;
             } else {
@@ -577,62 +551,53 @@ function namegen(namelen) {
             prevRepeat = false;
         }
     }
-    // console.log(retname.length)
+
     return retname;
 }
 
 function grineer() {
-    var dash = weightedRandom(grineerDash);
+    var retname = "";
 
-    if (dash === "-") {
-        var num = Math.floor(Math.random() * 1000); 
-        // append to name here
+    if (weightedRandom(grineerDash) === "-") {
+        var num = Math.floor(Math.random() * 1000);
+        retname = namegen(weightedRandom(grineerNL));
+        retname += ("-" + num) 
+    } else {
+        retname += namegen(weightedRandom(grineerNL)) + " " + namegen(weightedRandom(grineerNL));
     }
+
+    return retname;
 }
 
 function corpus() {
-    var retname = ""; 
+    var retname = "";  
 
-    var dash = weightedRandom(corpusDash); 
-
-    if (dash === "-") {
-        const corpusDashNL = {4: 12, 5:2};
-        var namelen = weightedRandom(corpusDashNL);
-
-        retname += ("-" + String.fromCharCode(65 + Math.floor(Math.random() * 26)));
+    if (weightedRandom(corpusDash) === "-") {
+        retname = namegen(weightedRandom({4: 12, 5:2})) + ("-" + String.fromCharCode(65 + Math.floor(Math.random() * 26)));
     } else {
-        // other name here
+        retname = namegen(weightedRandom(corpusNL)) + " " + namegen(weightedRandom(corpusNL));
     }
 
     // get random role
     retname += (", " + corpusRoles[Math.floor(Math.random() * corpusRoles.length)]);
-    console.log(retname)
     return retname;
-    
 }
 
 function hexis() {
-    var prefix = hexisPrefix[Math.floor(Math.random() * hexisPrefix.length)];
+    return hexisPrefix[Math.floor(Math.random() * hexisPrefix.length)] + " " + namegen(weightedRandom(hexisNL));
 }
 
 function suda() {
-    var prefix = sudaPrefix[Math.floor(Math.random() * sudaPrefix.length)];
+    return sudaPrefix[Math.floor(Math.random() * sudaPrefix.length)] + " " + namegen(weightedRandom(sudaNL));
 }
 
 function veil() {
-
+    return namegen(weightedRandom(veilNL));
 }
 
 function loka() {
-    var namelen = weightedRandom(lokaNL);
-    console.log(namelen);
-    var name = "";
-
-    for (var i = 0; i < namelen; i++) {
-        name += String.fromCharCode(65 + Math.floor(Math.random() * 26)); // 97 + 
-    }
-
-    console.log(name);
+    // do prefix suffix stuff in a bit ig
+    return namegen(weightedRandom(lokaNL));
 }
 
 /*-------------------------------------*/
