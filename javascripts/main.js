@@ -382,12 +382,13 @@ const corpusRoles = ["Developer", "Extrapolator", "Intern", "Paranoia Influencer
 const corpusNL = {3:11, 4:102, 5:11, 6:12, 7:3, 8:2, 11:1};
 const grineerNL = {2:1, 3:4, 4:18, 5:21, 6:16, 7:2, 8:3};
 const veilNL = {3:1, 4:7, 5:7, 6:2, 7:2, 8:1, 9:3};
-const lokaNL = {6:6, 7:7, 8:8, 9:1, 10:3, 11:1};
-const sudaNL = {3:2, 4:4, 5:5, 6:1, 7:5, 9:1};
+const lokaNL = {2:2, 3: 4, 4:2, 5:4, 6:6, 7:7, 8:8, 9:1, 10:3, 11:1};
+const sudaNL = {2: 2, 3:2, 4:4, 5:5, 6:1, 7:5, 9:1};
 const hexisNL = {3:3, 4:1, 5:9, 6:2, 7:1, 8:2, 9:3, 10:1, 12:1, 13:1, 18:2};
 
 const corpusDash = {"-": 2, " ": 8};
 const grineerDash = {"-":3, " ":7};
+const suffix_prob = {"true":4, "false":6};
 
 // letters for the actual name generation
 const vowels = "aeiou";
@@ -395,8 +396,7 @@ const consonants = "bcdfghjklmnpqrstvwxyz";
 const repeat_letter = {"true": 5, "false": 95};
 const alphabet_dist = {"vowel": 4, "consonant": 6} // idk if should increase this tbh
 
-// TODO: simplify this so the computer isn't shitting itself every time
-const vowel_dist = {"a": 216, "e": 163, "i": 178, "o": 128, "u": 56,}
+const vowel_dist = {"a": 216, "e": 163, "i": 178, "o": 128, "u": 56}
 const const_dist = { "b": 46, "c": 70, "d": 70,  "f": 22, "g": 54, "h": 75,  "j": 8, "k": 63, "l": 108, "m": 59, "n": 103, "p": 42, "r": 168, "s": 103, "t": 116, "v": 40, "w": 8, "x": 19, "y": 21, "z": 10};
 /*-------------------------------------*/
 // functions
@@ -491,7 +491,7 @@ function weightedRandom(options) {
 // given length of name, return a random name
 function namegen(namelen) {
     // random starting letter
-    var retname = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+    var retname = "ABCDEFGHIJKLMNOPRSTUVWXYZ"[Math.floor(Math.random() * 25)]; // no Q
     var prevLetter = retname.toLowerCase();
     var prevRepeat = false; 
 
@@ -503,7 +503,7 @@ function namegen(namelen) {
     for (let i = 1; i < namelen; i++) {
         // ensures that repeated letter can't occur twice in a row, the repeated letter has to be a different letter 
         // than the preceeding one,  and if prevLetter == const, letterToAdd == vowel & vice versa
-        if (weightedRandom(repeat_letter) === "true" && !prevRepeat && (i < namelen - 1) && i > 1){
+        if (!prevRepeat && weightedRandom(repeat_letter) === "true" && i < namelen - 1 && i > 1){
             if (vowels.includes(prevLetter)) {
                 letterToAdd = weightedRandom(const_dist);
                 constCount = 2;
@@ -588,16 +588,39 @@ function hexis() {
 }
 
 function suda() {
-    return sudaPrefix[Math.floor(Math.random() * sudaPrefix.length)] + " " + namegen(weightedRandom(sudaNL));
+    const suffix = ["kh", "zhat", "ok", "ka"];
+    var name = namegen(weightedRandom(sudaNL));
+
+    if (name.length < 3 || ((name.length == 3 || name.length == 5) && weightedRandom(suffix_prob) === "true")) {
+        name = name + suffix[Math.floor(Math.random() * suffix.length)];
+    }
+    return sudaPrefix[Math.floor(Math.random() * sudaPrefix.length)] + " " + name;
 }
 
 function veil() {
-    return namegen(weightedRandom(veilNL));
+    const suffix = ["lli", "an", "ah"];
+    var name = namegen(weightedRandom(veilNL));
+
+    if (name.length < 5 && weightedRandom(suffix_prob) === "true") {
+        name += suffix[Math.floor(Math.random() * suffix.length)];
+    }
+
+    return name;
 }
 
 function loka() {
-    // do prefix suffix stuff in a bit ig
-    return namegen(weightedRandom(lokaNL));
+    const suffix = ["ae", "il", "rot", "rod", "it"];
+    const prefix = ["Green", "Wind", "Moon", "Bell", "Sun", "Mist"];
+
+    var name = namegen(weightedRandom(lokaNL));
+
+    if(name.length < 6 && name.length >= 4) {
+        name += suffix[Math.floor(Math.random() * suffix.length)];
+    } else if (name.length < 4) {
+        name = prefix[Math.floor(Math.random() * prefix.length)] + name[0].toLowerCase() + name.substring(1);
+    }
+
+    return name;
 }
 
 /*-------------------------------------*/
